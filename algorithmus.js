@@ -49,7 +49,6 @@ function circle(posX, posY)
     putPixel(posX, posY, 155, 0, 0, 255);
     //console.log(x+"-"+y);
   }
-
 }
 
 var threshold = 20;

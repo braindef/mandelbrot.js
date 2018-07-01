@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="./css/multiLang.css"> -->
     
 <!--    <script src="./helperfunctions.js"></script> -->
-    <script src="./algorithm.js"></script>
+    <script src="./algorithmus.js"></script>
+    <script src="./mouseZoom.js"></script>
     
   </head>
   <body class="en" style="background-color:green; font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;">
@@ -15,7 +16,7 @@
     </div>
     <br>
     <button onclick="drawScreen()">drawScreen</button> zoom: <input id="zoom"/>
-    <br><button  onclick="read()">read</button>
+    <br><button  onclick="putToHTML()">read</button>
     offsetX: <input id="offsetX"/> offsetY: <input id="offsetY"/> <button onclick="update()">write to model</button>
   </body>
 </html>
