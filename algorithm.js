@@ -9,7 +9,12 @@ document.addEventListener("DOMContentLoaded", function() {
   putPixel2(550, 550, 0, 0, 255, 128);
   drawScreen();
   
-  canvas.addEventListener('click', function(evnt) { getCursorPosition(canvas, evnt); });
+  canvas.addEventListener('mousedown', function(evnt) {
+                                                    getCursorPosition(canvas, evnt, "down"); } );
+                                                      
+  canvas.addEventListener('mouseup', function(evnt) {
+                                                    getCursorPosition(canvas, evnt, "up"); } );
+                                                    
 });
 
 
@@ -20,10 +25,23 @@ var height=600;
 var threshold = 20;
 var color1 = [255, 0, 0];
 var color2 = [0, 0, 255];
-var scale = 0.5;
-var offsetX = 100;
+var scale = 2;
+var offsetX = 0;
 var offsetY = 0;
+var selection1 = [];
+var selection2 = [];
 
+function update() {
+  scale = document.getElementById("scale").value;
+  offsetX = document.getElementById("offsetX").value;
+  offsetY = document.getElementById("offsetY").value;
+}
+
+function read() {
+  document.getElementById("scale").value = scale;
+  document.getElementById("offsetX").value = offsetX;
+  document.getElementById("offsetY").value = offsetY;
+}
 
 
 //initialize the canvas
@@ -39,11 +57,34 @@ function initCanvas() {
 }
 
 
-function getCursorPosition(canvas, event) {
+function getCursorPosition(canvas, event, action) {
     var rect = canvas.getBoundingClientRect();
     var x = event.clientX - rect.left;
     var y = event.clientY - rect.top;
     console.log("x: " + x + " y: " + y);
+    
+    if(action=="down")
+    {
+      selection1=[x, y];
+      console.log("DOWN: "+selection1);
+    }
+    if(action=="up")
+    {
+      selection2=[x, y];
+      console.log("up: "+selection2);
+
+      scale=( (selection2[0] - selection1[0]) / width )*scale;
+      //offsetX=-(height/2)+(selection2[0]-selection1[0]);
+      //offsetY = -height/2 + selection2[1]*scale;   //y < 200 geht nach oben    y > 200 geht nach unten
+      console.log("Scale: "+scale + " offsetX: " + offsetX + " offsetY: " + offsetY);
+      
+      //maybe https://stackoverflow.com/questions/6775168/zooming-with-canvas
+      read();
+      drawScreen();
+    }
+    
+
+    
 }
 
 function putPixel1(x, y, r, g, b, a)
@@ -110,7 +151,7 @@ function mandelbrot(posX, posY)
     ctx.fillStyle = "black";
     ctx.fillText(posX+"-"+posY,posX-50,posY);
     ctx.fillText(parseInt(posX/scale-offsetX/scale)+"-"+parseInt(posY/scale-offsetX/scale),posX-50,posY+15);
-    console.log(posX + " -- " + posY);  
+    //console.log(posX + " -- " + posY);  
   }
 }
 

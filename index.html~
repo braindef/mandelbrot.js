@@ -1,7 +1,7 @@
 <html>
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Sudoku Solver.js</title>
+    <title>Mandelbrot.js</title>
 <!--    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/multiLang.css"> -->
     
@@ -13,5 +13,9 @@
     <div>
       <canvas id="mycanvas" width="600" height="600"></canvas>
     </div>
+    <br>
+    <button onclick="drawScreen()">drawScreen</button> <input id="scale"/>
+    <br><button  onclick="read()">read</button>
+    <input id="offsetX"/> <input id="offsetY"/> <button onclick="update()">write</button>
   </body>
 </html>
