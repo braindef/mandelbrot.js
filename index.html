@@ -12,10 +12,18 @@
   </head>
   <body class="en" style="background-color:green; font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;">
     <div>
-      <canvas id="mycanvas" width="600" height="600"></canvas>
+      <!--<canvas id="mycanvas" width="600" height="600"></canvas>-->
+      
+      <div style="position: relative;">
+        <canvas id="mycanvasL1" width="600" height="600" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+        <canvas id="mycanvasL2" width="600" height="600" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+      </div>
+      
+      
     </div>
-    <br>
-    <button onclick="drawScreen()">drawScreen</button> zoom: <input id="zoom"/>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <button onclick="drawScreen()">drawScreen</button> zoom: <input id="zoom"/>
     <br><button  onclick="putToHTML()">read</button>
     offsetX: <input id="offsetX"/> offsetY: <input id="offsetY"/> <button onclick="update()">write to model</button>
   </body>
