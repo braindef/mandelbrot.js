@@ -25,6 +25,7 @@ function getCursorPosition(canvas, event, action) {
       xOffset = xOffset - selection1[0] + ZeroX;
       yOffset = yOffset - selection1[1] + ZeroY;
       console.log("xOffset: "+xOffset);
+      putToHTML();
     }
     if(action=="up")
     {

@@ -31,7 +31,7 @@ var zeroX=xOffset;
 var zeroY=yOffset;
 var zoom = 100;
 
-var threshold = 20;
+var threshold = 40;
 var color1 = [255, 0, 0];
 var color2 = [0, 0, 255];
 
@@ -157,10 +157,7 @@ function mandelbrot(posX, posY)
   if( (posX%100==0)&&(posY%100==0)  )
   {
     putPixel(posX, posY, 255, 255, 255, 255);
-    ctx.fillStyle = "white";
-    ctx.fillText(posX+"-"+posY,posX-50,posY+15);
-    ctx.fillText(x.toFixed(1)+"-"+y.toFixed(1),posX-50,posY+25);
-    //console.log(posX + " -- " + posY);  
+ 
   }
 }
 
@@ -185,7 +182,7 @@ function drawScreen() {
     for(var y=0; y<width; y++)
     {
       mandelbrot(x, y);
-      circle(x, y);
+      //circle(x, y);
     }
     
 }
