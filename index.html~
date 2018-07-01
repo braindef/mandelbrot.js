@@ -16,6 +16,6 @@
     <br>
     <button onclick="drawScreen()">drawScreen</button> zoom: <input id="zoom"/>
     <br><button  onclick="read()">read</button>
-    <input id="offsetX"/> <input id="offsetY"/> <button onclick="update()">write to model</button>
+    offsetX: <input id="offsetX"/> offsetY: <input id="offsetY"/> <button onclick="update()">write to model</button>
   </body>
 </html>
