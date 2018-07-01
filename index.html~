@@ -1,0 +1,17 @@
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Sudoku Solver.js</title>
+<!--    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/multiLang.css"> -->
+    
+<!--    <script src="./helperfunctions.js"></script> -->
+    <script src="./algorithm.js"></script>
+    
+  </head>
+  <body class="en" style="background-color:green; font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;">
+    <div>
+      <canvas id="mycanvas" width="600" height="600"></canvas>
+    </div>
+  </body>
+</html>
