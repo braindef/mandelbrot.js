@@ -1,9 +1,15 @@
 //if page is finished loading run the initialisations
 document.addEventListener("DOMContentLoaded", function() {
   initCanvas();
+
+  ctx.font = "10px Arial";
+  ctx.fillStyle = "black";
+
   putPixel1(50, 50, 255, 0, 0, 128);
   putPixel2(550, 550, 0, 0, 255, 128);
   drawScreen();
+  
+  canvas.addEventListener('click', function(evnt) { getCursorPosition(canvas, evnt); });
 });
 
 
@@ -15,8 +21,9 @@ var threshold = 20;
 var color1 = [255, 0, 0];
 var color2 = [0, 0, 255];
 var scale = 0.5;
-var offsetX = 10;
+var offsetX = 100;
 var offsetY = 0;
+
 
 
 //initialize the canvas
@@ -29,6 +36,14 @@ function initCanvas() {
 //  ctx.drawImage(img, 10, 10, 580, 580);
   ctx.lineWidth=5;
   ctx.strokeRect(10, 10, 580, 580);
+}
+
+
+function getCursorPosition(canvas, event) {
+    var rect = canvas.getBoundingClientRect();
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+    console.log("x: " + x + " y: " + y);
 }
 
 function putPixel1(x, y, r, g, b, a)
@@ -88,6 +103,14 @@ function mandelbrot(posX, posY)
   {
     //in der Menge
     putPixel2(posX, posY, 0, 0, 0, 255);
+  }
+  //console.log(posX+" -- "+posY);
+  if( (posX%100==0)&&(posY%100==0)  )
+  {
+    ctx.fillStyle = "black";
+    ctx.fillText(posX+"-"+posY,posX-50,posY);
+    ctx.fillText(parseInt(posX/scale-offsetX/scale)+"-"+parseInt(posY/scale-offsetX/scale),posX-50,posY+15);
+    console.log(posX + " -- " + posY);  
   }
 }
 
