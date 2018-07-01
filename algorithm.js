@@ -77,19 +77,24 @@ function getCursorPosition(canvas, event, action) {
       selection2=[x, y];
       console.log("up: "+selection2);
 
-      zoom = zoom*width / (selection2[0] - selection1[0]);
-      console.log("offsetX "+offsetX);
-
-      centerSelectionX = selection2[0] - selection1[0];
+      scale = width/(selection2[0] - selection1[0]);
+      console.log("scale "+scale);
       
-      if(centerSelectionX>width/2)
-        offsetX += centerSelectionX;
-      if(centerSelectionX<width/2)
-        offsetX -= centerSelectionX;
+      zoom = zoom * scale  ;
+      console.log("zoom "+zoom);
 
-//      offsetX = offsetX + (selection2[0] - selection1[0]) / 2;
-      console.log("offsetX "+offsetX);
-      //maybe https://stackoverflow.com/questions/6775168/zooming-with-canvas
+      weight = ((width/2)-(selection2[0]+selection1[0])/2);
+      console.log("weight "+weight);
+      
+      deltaOffset = (selection2[0]-selection1[0])*weight;
+      console.log("deltaOffset: "+deltaOffset);
+      
+      if((selection1[0]+selection2[0])/2 > width/2)
+        offsetX -= deltaOffset;
+
+    if((selection1[0]+selection2[0])/2 < width/2)
+        offsetX += deltaOffset;
+
       putToHTML();
       drawScreen();
     }
