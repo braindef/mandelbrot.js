@@ -14,8 +14,8 @@
       <canvas id="mycanvas" width="600" height="600"></canvas>
     </div>
     <br>
-    <button onclick="drawScreen()">drawScreen</button> <input id="scale"/>
+    <button onclick="drawScreen()">drawScreen</button> zoom: <input id="zoom"/>
     <br><button  onclick="read()">read</button>
-    <input id="offsetX"/> <input id="offsetY"/> <button onclick="update()">write</button>
+    <input id="offsetX"/> <input id="offsetY"/> <button onclick="update()">write to model</button>
   </body>
 </html>

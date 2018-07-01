@@ -5,15 +5,17 @@ document.addEventListener("DOMContentLoaded", function() {
   ctx.font = "10px Arial";
   ctx.fillStyle = "black";
 
-  putPixel1(50, 50, 255, 0, 0, 128);
-  putPixel2(550, 550, 0, 0, 255, 128);
-  drawScreen();
+  putPixel(50, 50, 255, 0, 0, 128);
+
+
   
   canvas.addEventListener('mousedown', function(evnt) {
                                                     getCursorPosition(canvas, evnt, "down"); } );
                                                       
   canvas.addEventListener('mouseup', function(evnt) {
                                                     getCursorPosition(canvas, evnt, "up"); } );
+                                                    
+  read();
                                                     
 });
 
@@ -25,20 +27,21 @@ var height=600;
 var threshold = 20;
 var color1 = [255, 0, 0];
 var color2 = [0, 0, 255];
-var scale = 2;
-var offsetX = 0;
-var offsetY = 0;
+var zoom = 500;
+var scale = 0.5;
+var offsetX = -150;
+var offsetY = -150;
 var selection1 = [];
 var selection2 = [];
 
 function update() {
-  scale = document.getElementById("scale").value;
-  offsetX = document.getElementById("offsetX").value;
-  offsetY = document.getElementById("offsety").value;
+  zoom = parseFloat(document.getElementById("zoom").value);
+  offsetX = parseInt(document.getElementById("offsetX").value);
+  offsetY = parseInt(document.getElementById("offsetY").value);
 }
 
 function read() {
-  document.getElementById("scale").value = scale;
+  document.getElementById("zoom").value = zoom;
   document.getElementById("offsetX").value = offsetX;
   document.getElementById("offsetY").value = offsetY;
 }
@@ -56,7 +59,7 @@ function initCanvas() {
   ctx.strokeRect(10, 10, 580, 580);
 }
 
-
+/*
 function getCursorPosition(canvas, event, action) {
     var rect = canvas.getBoundingClientRect();
     var x = event.clientX - rect.left;
@@ -86,19 +89,9 @@ function getCursorPosition(canvas, event, action) {
 
     
 }
+*/
 
-function putPixel1(x, y, r, g, b, a)
-{
-  id = ctx.createImageData(1,1);
-  d = id.data;
-  d[0] = r;
-  d[1] = g;
-  d[2] = b;
-  d[3] = a;
-  ctx.putImageData(id, x, y);
-}
-
-function putPixel2(x, y, r, g, b, a)
+function putPixel(x, y, r, g, b, a)
 {
   ctx.fillStyle = "rgba("+r+", "+g+", "+b+", "+(a/255)+")";
   ctx.fillRect(x, y, 1, 1);
@@ -107,8 +100,8 @@ function putPixel2(x, y, r, g, b, a)
 
 function mandelbrot(posX, posY)
 {
-  var c_re = (posX*scale+offsetX -(height/2)) * 4.0/height;
-  var c_im = (posY*scale+offsetY  -(width/2)) * 4.0/width;
+  var c_re = (posX*scale+offsetX ) * 4.0/zoom;
+  var c_im = (posY*scale+offsetY ) * 4.0/zoom;
   
   var z_re = 0;
   var z_im = 0;
@@ -138,19 +131,19 @@ function mandelbrot(posX, posY)
     red = ratio*color1[0] + (1-ratio)*color2[0];
     green = ratio*color1[1] + (1-ratio)*color2[1];
     blue = ratio*color1[2] + (1-ratio)*color2[2];
-    putPixel2(posX, posY, red, green, blue, 255);
+    putPixel(posX, posY, red, green, blue, 255);
   }
   else
   {
     //in der Menge
-    putPixel2(posX, posY, 0, 0, 0, 255);
+    putPixel(posX, posY, 0, 0, 0, 255);
   }
   //console.log(posX+" -- "+posY);
   if( (posX%100==0)&&(posY%100==0)  )
   {
-    ctx.fillStyle = "black";
-    ctx.fillText(posX+"-"+posY,posX-50,posY);
-    ctx.fillText(parseInt(posX/scale-offsetX/scale)+"-"+parseInt(posY/scale-offsetX/scale),posX-50,posY+15);
+    ctx.fillStyle = "white";
+    ctx.fillText(posX+"-"+posY,posX-40,posY);
+    ctx.fillText(parseInt((posX+offsetX)/zoom)+"-"+parseInt((posY+offsetY)/zoom),posX-40,posY+15);
     //console.log(posX + " -- " + posY);  
   }
 }
