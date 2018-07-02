@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   putPixel(50, 50, 255, 0, 0, 128);
   
+  /*
   canvas2.addEventListener('mousedown', function(evnt) {
                                                     getCursorPosition(canvas2, evnt, "down"); } );
                                                       
@@ -15,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function() {
                                                                                                           
   canvas2.addEventListener('mousemove', function(evnt) {
                                                     getCursorPosition(canvas2, evnt, "move"); } );
+  */
+  initZoom();
   drawScreen()
 });
 

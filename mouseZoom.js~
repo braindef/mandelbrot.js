@@ -1,9 +1,9 @@
 //if page is finished loading run the initialisations
 function initZoom() 
 {
-  canvas.addEventListener('mousedown', function(evnt) { getCursorPosition(canvas, evnt, "down"); } );
-  canvas.addEventListener('mouseup', function(evnt) { getCursorPosition(canvas, evnt, "up"); } );
-  canvas.addEventListener('mousemove', function(evnt) { getCursorPosition(canvas, evnt, "move"); } );
+  canvas2.addEventListener('mousedown', function(evnt) { getCursorPosition(canvas, evnt, "down"); } );
+  canvas2.addEventListener('mouseup', function(evnt) { getCursorPosition(canvas, evnt, "up"); } );
+  canvas2.addEventListener('mousemove', function(evnt) { getCursorPosition(canvas, evnt, "move"); } );
 }
 
 var selection=false;
@@ -59,6 +59,7 @@ function getCursorPosition(canvas, event, action) {
     {
       selection=false;
       ctx2.clearRect(0,0,width,height);
+      
       //drawScreen();
     }
 }

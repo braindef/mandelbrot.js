@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function() {
   canvas2.addEventListener('mouseup', function(evnt) {
                                                     getCursorPosition(canvas2, evnt, "up"); } );
                                                                                                           
-  canvas2.addEventListener('mouseup', function(evnt) {
-                                                    getCursorPosition(canvas2, evnt, "up"); } );
+  canvas2.addEventListener('mousemove', function(evnt) {
+                                                    getCursorPosition(canvas2, evnt, "move"); } );
   drawScreen()
 });
 
