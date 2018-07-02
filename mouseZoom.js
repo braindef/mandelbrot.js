@@ -16,22 +16,21 @@ function getCursorPosition(canvas, event, action) {
     
     if(action=="down")
     {
-      /*
-      console.log(canvasTranslation);
+      
+      console.log("initial canvastranslation: "+canvasTranslation);
       positionInCanvas=getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
       
       console.log(positionInCanvas);
+/*
 
+      //click to zoom function
     	zoomfactor = 3;
 
       newCanvasTranslation = [0,0];
 
       newCanvasTranslation[0]=newCanvasTranslation[0]+positionInCanvas[0]-canvasDiagonal[0]/zoomfactor/2;
       newCanvasTranslation[1]=newCanvasTranslation[1]+positionInCanvas[1]-canvasDiagonal[1]/zoomfactor/2;
-
 			canvasTranslation=newCanvasTranslation;
-
-      console.log("canvasTranslation"+canvasTranslation);
 
       canvasDiagonal[0]/=zoomfactor;
       canvasDiagonal[1]/=zoomfactor;
@@ -39,12 +38,17 @@ function getCursorPosition(canvas, event, action) {
       console.log("canvasDiagonal"+canvasDiagonal);
       
       startpoint = [x, y];
+      console.log("Set Startpoint to: "+startpoint);
       selection=true;
 
     }
     if(action=="move")
     {
-      console.log("MOUSEMOVE");
+      positionInCanvas=getCoordinate( [x, y] , canvasTranslation, canvasDiagonal, [width, height]);
+      
+      console.log("currently: "+positionInCanvas);
+      console.log("canvasDiagonal "+canvasDiagonal);
+      console.log("canvasTranslation "+canvasTranslation);
       ctx2.clearRect(0,0,width,height);
       
       if(selection)
@@ -59,7 +63,28 @@ function getCursorPosition(canvas, event, action) {
     {
       selection=false;
       ctx2.clearRect(0,0,width,height);
+
+      positionInCanvas1=getCoordinate(startpoint, canvasTranslation, canvasDiagonal, [width, height]);      
+      positionInCanvas2=getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
+
+      newCanvasDiagonal = [];
+
+      console.log("canvasDiagonal; " +canvasDiagonal);
+      newCanvasDiagonal[0]=positionInCanvas2[0]-positionInCanvas1[0];
+      //canvasDiagonal[1]=positionInCanvas2[1]-positionInCanvas1[1];
+      newCanvasDiagonal[1]=newCanvasDiagonal[0]*canvasDiagonal[1]/canvasDiagonal[0];
+      canvasDiagonal=newCanvasDiagonal;
+      console.log("canvasDiagonal; " +canvasDiagonal);
       
-      //drawScreen();
+      newCanvasTranslation=[];
+      
+      console.log("canvasTranslation; " +canvasTranslation);
+      newCanvasTranslation[0]=-positionInCanvas[0];
+      newCanvasTranslation[1]=-positionInCanvas[1];
+      
+      canvasTranslation=newCanvasTranslation;
+      console.log("canvasTranslation; " +canvasTranslation);
+      
+      drawScreen();
     }
 }

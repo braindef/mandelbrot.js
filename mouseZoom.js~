@@ -1,9 +1,9 @@
 //if page is finished loading run the initialisations
 function initZoom() 
 {
-  canvas2.addEventListener('mousedown', function(evnt) { getCursorPosition(canvas, evnt, "down"); } );
-  canvas2.addEventListener('mouseup', function(evnt) { getCursorPosition(canvas, evnt, "up"); } );
-  canvas2.addEventListener('mousemove', function(evnt) { getCursorPosition(canvas, evnt, "move"); } );
+  canvas2.addEventListener('mousedown', function(evnt) { getCursorPosition(canvas2, evnt, "down"); } );
+  canvas2.addEventListener('mouseup', function(evnt) { getCursorPosition(canvas2, evnt, "up"); } );
+  canvas2.addEventListener('mousemove', function(evnt) { getCursorPosition(canvas2, evnt, "move"); } );
 }
 
 var selection=false;
@@ -16,12 +16,12 @@ function getCursorPosition(canvas, event, action) {
     
     if(action=="down")
     {
-      /*
+      
       console.log(canvasTranslation);
       positionInCanvas=getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
       
       console.log(positionInCanvas);
-
+/*
     	zoomfactor = 3;
 
       newCanvasTranslation = [0,0];
@@ -59,7 +59,26 @@ function getCursorPosition(canvas, event, action) {
     {
       selection=false;
       ctx2.clearRect(0,0,width,height);
+
+      positionInCanvas1=getCoordinate(startpoint, canvasTranslation, canvasDiagonal, [width, height]);      
+      positionInCanvas2=getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
+
+      console.log("canvasDiagonal; " +canvasDiagonal);
+      canvasDiagonal[0]=positionInCanvas2[0]-positionInCanvas1[0];
+      canvasDiagonal[1]=positionInCanvas2[1]-positionInCanvas1[1];
+      console.log("canvasDiagonal; " +canvasDiagonal);
       
-      //drawScreen();
+      newCanvasTranslation=[];
+      
+      console.log("canvasTranslation; " +canvasTranslation);
+      newCanvasTranslation[0]=canvasTranslation[0]+canvasDiagonal[0];
+      newCanvasTranslation[1]=canvasTranslation[1]+canvasDiagonal[1];
+      
+      canvasTranslation=newCanvasTranslation;
+      console.log("canvasTranslation; " +canvasTranslation);
+      
+
+      
+      drawScreen();
     }
 }
