@@ -8,6 +8,7 @@ function initZoom()
 
 var selection=false;
 var startpoint = [];
+var endpoint = [];
 
 function getCursorPosition(canvas, event, action) {
     var rect = canvas.getBoundingClientRect();
@@ -32,21 +33,33 @@ function getCursorPosition(canvas, event, action) {
       canvasDiagonal[1]/=zoomfactor;
 */
       
-      endpoint = [x, y];
+      startpoint = [x, y];
 
       selection=true;
 
     }
     if(action=="move")
     {
-      console.log(getCoordinate([x,y], canvasTranslation, canvasDiagonal, [width, height]));
+      //console.log(getCoordinate([x,y], canvasTranslation, canvasDiagonal, [width, height]));
       ctx2.clearRect(0,0,width,height);
+
+      coordinate = getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
+      console.log(coordinate);
+    console.log( (Math.sign(coordinate[0])==1) && (Math.sign(coordinate[1])==-1));  //Quadrant1
+    //console.log( (Math.sign(coordinate[0])==-1) && (Math.sign(coordinate[1])==1));  //Quadrant3
+    //console.log( (Math.sign(coordinate[0])==1) && (Math.sign(coordinate[1])==1));  //Quadrant2
+    //console.log( (Math.sign(coordinate[0])==-1) && (Math.sign(coordinate[1])==-1));  //Quadrant4
       
       if(selection)
       {      
         ctx2.lineWidth=3;
         ctx2.strokeStyle="#FFFF00";
-        ctx2.strokeRect(endpoint[0],endpoint[1],x-endpoint[0],x*canvasDiagonal[1]/canvasDiagonal[0]-endpoint[1]);
+        
+
+
+        
+        if( Math.sign(startpoint[0]<0) && Math.sign(startpoint[1]<0))
+          ctx2.strokeRect(startpoint[0],startpoint[1],x-startpoint[0],-Math.sign(startpoint[1]-y)*Math.abs(x*canvasDiagonal[1]/canvasDiagonal[0]-startpoint[1]));
       }
     }
 
@@ -55,20 +68,20 @@ function getCursorPosition(canvas, event, action) {
       selection=false;
       ctx2.clearRect(0,0,width,height);
 
-      startpoint = [x, y];
+      endpoint = [x, y];
 
       //die position sollte korrekt sein und hat vorzeichen
-      positionInCanvas1=getCoordinate(endpoint, canvasTranslation, canvasDiagonal, [width, height]);
-      positionInCanvas2=getCoordinate(startpoint, canvasTranslation, canvasDiagonal, [width, height]);
+      positionInCanvas1=getCoordinate(startpoint, canvasTranslation, canvasDiagonal, [width, height]);
+      positionInCanvas2=getCoordinate(endpoint, canvasTranslation, canvasDiagonal, [width, height]);
 
       newCanvasDiagonal = [];
 
       console.log(positionInCanvas1);
       console.log(positionInCanvas2);
 
-      //die neue Canvas Diagonale X komponente
+      //die neue Canvas Diagonale X komponente, sollte immer positiv sein
       newCanvasDiagonal[0]=Math.abs(positionInCanvas2[0]-positionInCanvas1[0]);
-      //damit es im richtigen seitenverhältnis bleibt
+      //damit es im richtigen seitenverhältnis bleibt, sollte auch immer positiv sein
       newCanvasDiagonal[1]=Math.abs(newCanvasDiagonal[0]*canvasDiagonal[1]/canvasDiagonal[0]);
       
       console.log(canvasDiagonal);
@@ -76,7 +89,7 @@ function getCursorPosition(canvas, event, action) {
       
       newCanvasTranslation=[];
  
-      positionInCanvas=getCoordinate(endpoint , canvasTranslation, canvasDiagonal, [width, height]);     
+      positionInCanvas=getCoordinate(startpoint , canvasTranslation, canvasDiagonal, [width, height]);     
 
       newCanvasTranslation[0]=positionInCanvas[0];
       newCanvasTranslation[1]=positionInCanvas[1];
