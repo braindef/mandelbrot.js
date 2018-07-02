@@ -58,7 +58,7 @@ function getCursorPosition(canvas, event, action) {
 
 
         
-        if( Math.sign(startpoint[0]<0) && Math.sign(startpoint[1]<0))
+        //if( Math.sign(startpoint[0]<0) && Math.sign(startpoint[1]<0))
           ctx2.strokeRect(startpoint[0],startpoint[1],x-startpoint[0],-Math.sign(startpoint[1]-y)*Math.abs(x*canvasDiagonal[1]/canvasDiagonal[0]-startpoint[1]));
       }
     }
