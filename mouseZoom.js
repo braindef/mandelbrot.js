@@ -39,14 +39,14 @@ function getCursorPosition(canvas, event, action) {
     }
     if(action=="move")
     {
-      
+      console.log(getCoordinate([x,y], canvasTranslation, canvasDiagonal, [width, height]));
       ctx2.clearRect(0,0,width,height);
       
       if(selection)
       {      
         ctx2.lineWidth=3;
         ctx2.strokeStyle="#FFFF00";
-        ctx2.strokeRect(endpoint[0],endpoint[1],x-endpoint[0],y-endpoint[1]);
+        ctx2.strokeRect(endpoint[0],endpoint[1],x-endpoint[0],x*canvasDiagonal[1]/canvasDiagonal[0]-endpoint[1]);
       }
     }
 
@@ -57,22 +57,29 @@ function getCursorPosition(canvas, event, action) {
 
       startpoint = [x, y];
 
-      positionInCanvas1=getCoordinate(startpoint, canvasTranslation, canvasDiagonal, [width, height]);      
-      positionInCanvas2=getCoordinate(endpoint, canvasTranslation, canvasDiagonal, [width, height]);
+      //die position sollte korrekt sein und hat vorzeichen
+      positionInCanvas1=getCoordinate(endpoint, canvasTranslation, canvasDiagonal, [width, height]);
+      positionInCanvas2=getCoordinate(startpoint, canvasTranslation, canvasDiagonal, [width, height]);
 
       newCanvasDiagonal = [];
 
+      console.log(positionInCanvas1);
+      console.log(positionInCanvas2);
+
       //die neue Canvas Diagonale X komponente
-      newCanvasDiagonal[0]=positionInCanvas2[0]-positionInCanvas1[0];
+      newCanvasDiagonal[0]=Math.abs(positionInCanvas2[0]-positionInCanvas1[0]);
       //damit es im richtigen seitenverhältnis bleibt
-      newCanvasDiagonal[1]=newCanvasDiagonal[0]*canvasDiagonal[1]/canvasDiagonal[0];
+      newCanvasDiagonal[1]=Math.abs(newCanvasDiagonal[0]*canvasDiagonal[1]/canvasDiagonal[0]);
+      
+      console.log(canvasDiagonal);
+      console.log(newCanvasDiagonal);
       
       newCanvasTranslation=[];
  
       positionInCanvas=getCoordinate(endpoint , canvasTranslation, canvasDiagonal, [width, height]);     
 
-      newCanvasTranslation[0]=-positionInCanvas[0];
-      newCanvasTranslation[1]=-positionInCanvas[1];
+      newCanvasTranslation[0]=positionInCanvas[0];
+      newCanvasTranslation[1]=positionInCanvas[1];
       
       canvasTranslation=newCanvasTranslation;
       canvasDiagonal=newCanvasDiagonal;
