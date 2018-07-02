@@ -3,8 +3,11 @@ function initZoom()
 {
   canvas.addEventListener('mousedown', function(evnt) { getCursorPosition(canvas, evnt, "down"); } );
   canvas.addEventListener('mouseup', function(evnt) { getCursorPosition(canvas, evnt, "up"); } );
+  canvas.addEventListener('mousemove', function(evnt) { getCursorPosition(canvas, evnt, "move"); } );
 }
 
+var selection=false;
+var startpoint = [];
 
 function getCursorPosition(canvas, event, action) {
     var rect = canvas.getBoundingClientRect();
@@ -13,12 +16,13 @@ function getCursorPosition(canvas, event, action) {
     
     if(action=="down")
     {
+      /*
       console.log(canvasTranslation);
       positionInCanvas=getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
       
       console.log(positionInCanvas);
 
-    	zoomfactor = 2;
+    	zoomfactor = 3;
 
       newCanvasTranslation = [0,0];
 
@@ -31,14 +35,30 @@ function getCursorPosition(canvas, event, action) {
 
       canvasDiagonal[0]/=zoomfactor;
       canvasDiagonal[1]/=zoomfactor;
-      
+      */
       console.log("canvasDiagonal"+canvasDiagonal);
       
+      startpoint = [x, y];
+      selection=true;
 
     }
+    if(action=="move")
+    {
+      console.log("MOUSEMOVE");
+      ctx2.clearRect(0,0,width,height);
+      
+      if(selection)
+      {      
+        ctx2.lineWidth=3;
+        ctx2.strokeStyle="#FF0000";
+        ctx2.strokeRect(startpoint[0],startpoint[1],x-startpoint[0],y-startpoint[1]);
+      }
+    }
+
     if(action=="up")
     {
-
-      drawScreen();
+      selection=false;
+      ctx2.clearRect(0,0,width,height);
+      //drawScreen();
     }
 }

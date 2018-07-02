@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                                       
   canvas2.addEventListener('mouseup', function(evnt) {
                                                     getCursorPosition(canvas2, evnt, "up"); } );
+                                                                                                          
+  canvas2.addEventListener('mousemove', function(evnt) {
+                                                    getCursorPosition(canvas2, evnt, "move"); } );
   drawScreen()
 });
 
@@ -35,7 +38,7 @@ function initCanvas() {
 //  img.src = "./xyz.svg"; 
 //  ctx1.drawImage(img, 10, 10, 590, 590);
   ctx2.lineWidth=5;
-  ctx2.strokeRect(10, 10, 590, 590);
+  ctx2.strokeRect(10, 10, 1180, 780);
 }
 
 //draw a single pixel

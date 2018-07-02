@@ -2,29 +2,21 @@
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Mandelbrot.js</title>
-<!--    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/multiLang.css"> -->
-    
-<!--    <script src="./helperfunctions.js"></script> -->
-    <script src="./algorithm.js"></script>
-    <script src="./mouseZoom.js"></script>
+
+    <script src="./helperfunctions.js"></script>
+    <script src="./mouseZoom.js"></script>    
+    <script src="./basics.js"></script>
+    <script src="./draw.js"></script>
+    <script src="./circle.js"></script>
+    <script src="./mandelbrot.js"></script>
     
   </head>
-  <body class="en" style="background-color:green; font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;">
-    <div>
-      <!--<canvas id="mycanvas" width="600" height="600"></canvas>-->
+  <body class="en" style="font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;">
       
       <div style="position: relative;">
-        <canvas id="mycanvasL1" width="600" height="600" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
-        <canvas id="mycanvasL2" width="600" height="600" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+        <canvas id="mycanvasL1" width="1200" height="600" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+        <canvas id="mycanvasL2" width="1200" height="600" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
       </div>
       
-      
-    </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <button onclick="drawScreen()">drawScreen</button> zoom: <input id="zoom"/>
-    <br><button  onclick="putToHTML()">read</button>
-    offsetX: <input id="offsetX"/> offsetY: <input id="offsetY"/> <button onclick="update()">write to model</button>
   </body>
 </html>

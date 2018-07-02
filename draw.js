@@ -1,6 +1,6 @@
 
-var canvasTranslation = [0, 0];
-var canvasDiagonal = [5.0, 5.0];
+var canvasTranslation = [-6, -4];
+var canvasDiagonal = [12.0, 8.0];
 
 function drawScreen()
 {

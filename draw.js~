@@ -1,6 +1,6 @@
 
-var canvasTranslation = [0, 0];
-var canvasDiagonal = [5.0, 5.0];
+var canvasTranslation = [-6, -6];
+var canvasDiagonal = [12.0, 8.0];
 
 function drawScreen()
 {
@@ -13,6 +13,6 @@ function drawScreen()
         //console.log("In circle");
         putPixel(i, j, 255, 0, 0, 255);
       }*/
-      if ( mandelbrot( getCoordinate([i, j], canvasTranslation, canvasDiagonal, [width, height] ) , [0, 0]) )
+      if ( mandelbrot( getCoordinate([i, j], canvasTranslation, canvasDiagonal, [width, height] ) , [0, 0], [i, j]) )
         putPixel(i, j, 0, 255, 0, 255);
 }
