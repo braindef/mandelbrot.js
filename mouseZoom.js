@@ -16,14 +16,10 @@ function getCursorPosition(canvas, event, action) {
     
     if(action=="down")
     {
-      
-      console.log("initial canvastranslation: "+canvasTranslation);
       debugdisplay=getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
-      
-      console.log(debugdisplay);
-/*
+      //TODO: könnte man im Gui anzeigen
 
-      //click to zoom function
+/*    //click to zoom function
     	zoomfactor = 3;
 
       newCanvasTranslation = [0,0];
@@ -34,11 +30,10 @@ function getCursorPosition(canvas, event, action) {
 
       canvasDiagonal[0]/=zoomfactor;
       canvasDiagonal[1]/=zoomfactor;
-      */
-      console.log("canvasDiagonal"+canvasDiagonal);
+*/
       
       endpoint = [x, y];
-      console.log("Set Startpoint to: "+startpoint);
+
       selection=true;
 
     }
@@ -67,24 +62,20 @@ function getCursorPosition(canvas, event, action) {
 
       newCanvasDiagonal = [];
 
-      console.log("canvasDiagonal; " +canvasDiagonal);
+      //die neue Canvas Diagonale X komponente
       newCanvasDiagonal[0]=positionInCanvas2[0]-positionInCanvas1[0];
-      //canvasDiagonal[1]=positionInCanvas2[1]-positionInCanvas1[1];
+      //damit es im richtigen seitenverhältnis bleibt
       newCanvasDiagonal[1]=newCanvasDiagonal[0]*canvasDiagonal[1]/canvasDiagonal[0];
       
       newCanvasTranslation=[];
  
       positionInCanvas=getCoordinate(endpoint , canvasTranslation, canvasDiagonal, [width, height]);     
-      console.log("canvasTranslation; " +canvasTranslation);
+
       newCanvasTranslation[0]=-positionInCanvas[0];
       newCanvasTranslation[1]=-positionInCanvas[1];
       
       canvasTranslation=newCanvasTranslation;
-      console.log("canvasTranslation; " +canvasTranslation);
-
       canvasDiagonal=newCanvasDiagonal;
-      console.log("canvasDiagonal; " +canvasDiagonal);
-
       
       drawScreen();
     }
