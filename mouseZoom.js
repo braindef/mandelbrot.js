@@ -18,7 +18,7 @@ function getCursorPosition(canvas, event, action) {
       
       console.log(positionInCanvas);
 
-    	zoomfactor = 2;
+    	zoomfactor = 3;
 
       newCanvasTranslation = [0,0];
 

@@ -4,7 +4,7 @@
     <title>Mandelbrot.js</title>
 
     <script src="./helperfunctions.js"></script>
-    <script src="./mousezoom.js"></script>    
+    <script src="./mouseZoom.js"></script>    
     <script src="./basics.js"></script>
     <script src="./circle.js"></script>
     <script src="./draw.js"></script>
