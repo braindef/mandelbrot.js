@@ -44,8 +44,8 @@ function getCursorPosition(canvas, event, action) {
       ctx2.clearRect(0,0,width,height);
 
       coordinate = getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
-      console.log(coordinate);
-    console.log( (Math.sign(coordinate[0])==1) && (Math.sign(coordinate[1])==-1));  //Quadrant1
+    //  console.log(coordinate);
+    //console.log( (Math.sign(coordinate[0])==1) && (Math.sign(coordinate[1])==-1));  //Quadrant1
     //console.log( (Math.sign(coordinate[0])==-1) && (Math.sign(coordinate[1])==1));  //Quadrant3
     //console.log( (Math.sign(coordinate[0])==1) && (Math.sign(coordinate[1])==1));  //Quadrant2
     //console.log( (Math.sign(coordinate[0])==-1) && (Math.sign(coordinate[1])==-1));  //Quadrant4
@@ -55,11 +55,13 @@ function getCursorPosition(canvas, event, action) {
         ctx2.lineWidth=3;
         ctx2.strokeStyle="#FFFF00";
         
-
-
+        //edge length of the selection square
+        edgeX = x - startpoint[0];
+        edgeY = y - startpoint[1];
+        aspectRatio = canvasDiagonal[1]/canvasDiagonal[0];
         
         //if( Math.sign(startpoint[0]<0) && Math.sign(startpoint[1]<0))
-          ctx2.strokeRect(startpoint[0],startpoint[1],x-startpoint[0],-Math.sign(startpoint[1]-y)*Math.abs(x*canvasDiagonal[1]/canvasDiagonal[0]-startpoint[1]));
+          ctx2.strokeRect(startpoint[0], startpoint[1], edgeX, Math.sign(edgeY) * Math.abs(edgeX*aspectRatio));
       }
     }
 
@@ -67,6 +69,10 @@ function getCursorPosition(canvas, event, action) {
     {
       selection=false;
       ctx2.clearRect(0,0,width,height);
+      
+      
+      var y = (x == 2 ? "yes" : "no");
+      
 
       endpoint = [x, y];
 
