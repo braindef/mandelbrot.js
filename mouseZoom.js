@@ -63,6 +63,11 @@ function getCursorPosition(canvas, event, action) {
         //if( Math.sign(startpoint[0]<0) && Math.sign(startpoint[1]<0))
           ctx2.strokeRect(startpoint[0], startpoint[1], edgeX, Math.sign(edgeY) * Math.abs(edgeX*aspectRatio));
       }
+
+      document.getElementById('x1').value = positionInCanvas1[0];
+      document.getElementById('y1').value = positionInCanvas1[1];
+      document.getElementById('x2').value = positionInCanvas2[0];
+      document.getElementById('y2').value = positionInCanvas2[1];
     }
 
     if(action=="up")
@@ -71,19 +76,20 @@ function getCursorPosition(canvas, event, action) {
       selection=false;
       ctx2.clearRect(0,0,width,height);
       
-      //calculate all points of the selection square
+      //calculate all the upper left and lower right point of the selection square, since you can sleect from left-right or right-left or up-down or down-up 
       //notation: var y = (x == 2 ? "yes" : "no");
       x1 = (startpoint[0] > endpoint[0] ? endpoint[0] : startpoint[0]);
       y1 = (startpoint[1] > endpoint[1] ? endpoint[1] : startpoint[1]);
       x2 = (startpoint[0] < endpoint[0] ? endpoint[0] : startpoint[0]); 
       y2 = (startpoint[1] < endpoint[1] ? endpoint[1] : startpoint[1]);
       
-      //selecting the upper left and the lower right
 
+      startpoint = [x1, y1];
+      endpoint = [x2, y2];
 
       //die position sollte korrekt sein und hat vorzeichen
-      positionInCanvas1=getCoordinate([x1, y1], canvasTranslation, canvasDiagonal, [width, height]);
-      positionInCanvas2=getCoordinate([x2, y2], canvasTranslation, canvasDiagonal, [width, height]);
+      positionInCanvas1=getCoordinate(startpoint, canvasTranslation, canvasDiagonal, [width, height]);
+      positionInCanvas2=getCoordinate(endpoint, canvasTranslation, canvasDiagonal, [width, height]);
 
       newCanvasDiagonal = [];
 
@@ -108,6 +114,11 @@ function getCursorPosition(canvas, event, action) {
       canvasTranslation=newCanvasTranslation;
       canvasDiagonal=newCanvasDiagonal;
       
+      document.getElementById('x1').value = positionInCanvas1[0];
+      document.getElementById('y1').value = positionInCanvas1[1];
+      document.getElementById('x2').value = positionInCanvas2[0];
+      document.getElementById('y2').value = positionInCanvas2[1];
+            
       drawScreen();
     }
 }

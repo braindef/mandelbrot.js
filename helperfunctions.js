@@ -7,20 +7,51 @@ document.addEventListener("DOMContentLoaded", function() {
 
   putPixel(50, 50, 255, 0, 0, 128);
   
-  /*
-  canvas2.addEventListener('mousedown', function(evnt) {
-                                                    getCursorPosition(canvas2, evnt, "down"); } );
-                                                      
-  canvas2.addEventListener('mouseup', function(evnt) {
-                                                    getCursorPosition(canvas2, evnt, "up"); } );
-                                                                                                          
-  canvas2.addEventListener('mousemove', function(evnt) {
-                                                    getCursorPosition(canvas2, evnt, "move"); } );
-  */
   initZoom();
-  drawScreen()
+  console.log(canvasTranslation);
+  console.log(canvasDiagonal);
+  getFromString(window.location.hash);
+  drawScreen(20);
+
 });
 
+
+function getFromString(urlHash)
+{
+  if(urlHash=="") return;
+  bits = urlHash.split(";");
+  alert(bits);
+
+  x1 = parseFloat(bits[0].split("=")[1]);
+  document.getElementById('x1').value = x1;
+
+  y1 = parseFloat(bits[1].split("=")[1]);
+  document.getElementById('y1').value = y1;
+
+  canvasTranslation[0]=x1;
+  canvasTranslation[1]=y1;
+
+  x2 = parseFloat(bits[2].split("=")[1]);
+  document.getElementById('x2').value = x2;
+  
+  y2 = parseFloat(bits[3].split("=")[1]);
+  document.getElementById('y2').value = y2;
+  
+  canvasDiagonal[0]=parseFloat(bits[2].split("=")[1])-parseFloat(bits[0].split("=")[1]);
+  canvasDiagonal[1]=parseFloat(bits[3].split("=")[1])-parseFloat(bits[1].split("=")[1]);
+  
+  console.log(canvasTranslation);
+  console.log(canvasDiagonal);
+}
+
+function copyToURL()
+{
+  newHash= "#x1=" + document.getElementById('x1').value +
+           ";y1=" + document.getElementById('y1').value +
+           ";x2=" + document.getElementById('x2').value +           
+           ";y2=" + document.getElementById('y2').value;
+  window.location.hash=newHash;
+}
 
 var ctx1;
 var ctx2;

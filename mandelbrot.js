@@ -4,7 +4,7 @@ var threshold = 20;
 var color1 = [255, 0, 0];
 var color2 = [0, 0, 255];
 
-function mandelbrot(coordinate, offset, pixel)
+function mandelbrot(coordinate, offset, threshold, pixel)
 {
   x = coordinate[0] - offset[0];
   y = coordinate[1] - offset[1];
