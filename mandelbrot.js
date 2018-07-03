@@ -36,10 +36,11 @@ function mandelbrot(coordinate, offset, threshold, pixel)
   {
     //nicht in der Menge
     ratio = iteration/threshold;
-    red = ratio*color1[0] + (1-ratio)*color2[0];
-    green = ratio*color1[1] + (1-ratio)*color2[1];
-    blue = ratio*color1[2] + (1-ratio)*color2[2];
+    red = parseInt(ratio*color1[0] + (1-ratio)*color2[0]);
+    green = parseInt(ratio*color1[1] + (1-ratio)*color2[1]);
+    blue = parseInt(ratio*color1[2] + (1-ratio)*color2[2]);
     putPixel(pixel[0], pixel[1], red, green, blue, 255);
+    //console.log(pixel[0]+" "+pixel[1]+" "+red+" "+green+" "+blue+" "+255);
   }
   else
   {

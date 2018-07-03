@@ -5,13 +5,14 @@ function initZoom()
   canvas2.addEventListener('mouseup', function(evnt) { getCursorPosition(canvas2, evnt, "up"); } );
   canvas2.addEventListener('mousemove', function(evnt) { getCursorPosition(canvas2, evnt, "move"); } );
   
-  canvas2.addEventListener('touchstart', function(evnt) { getCursorPosition(canvas2, evnt, "touch"); } );
+  canvas2.addEventListener('touchend', function(evnt) { getCursorPosition(canvas2, evnt, "touch"); } );
 
 }
 
 var selection=false;
 var startpoint = [];
 var endpoint = [];
+var touchDevice = false;
 
 function getCursorPosition(canvas, event, action) {
     var rect = canvas.getBoundingClientRect();
@@ -19,34 +20,47 @@ function getCursorPosition(canvas, event, action) {
     var y = event.clientY - rect.top;
     if(event.touches!=null)
     {
-      var tx = parseInt(event.touches[0].clientX - rect.left);
-      var ty = parseInt(event.touches[0].clientY - rect.top);
+      var tx = parseInt(event.changedTouches[0].clientX - rect.left);
+      var ty = parseInt(event.changedTouches[0].clientY - rect.top);
     }
 
-    if(action=="down")
+    if(action=="touch")
     {
-    /*
-      alert(tx+" "+ty);
+      touchDevice = true;
+
       positionInCanvas=getCoordinate([tx, ty], canvasTranslation, canvasDiagonal, [width, height]);
 
     	zoomfactor = 2;
 
       newCanvasTranslation = [0,0];
+      newCanvasDiagonal = [0,0];      
+      
+      newCanvasDiagonal[0] = canvasDiagonal[0] / zoomfactor / 2;
+      newCanvasDiagonal[1] = canvasDiagonal[1] / zoomfactor / 2;
 
-      newCanvasTranslation[0]=newCanvasTranslation[0]+positionInCanvas[0]-canvasDiagonal[0]/zoomfactor/2;
-      newCanvasTranslation[1]=newCanvasTranslation[1]+positionInCanvas[1]-canvasDiagonal[1]/zoomfactor/2;
+      newCanvasTranslation[0] = positionInCanvas[0] - newCanvasDiagonal[0];
+      newCanvasTranslation[1] = positionInCanvas[1] - newCanvasDiagonal[1];
 
 			canvasTranslation=newCanvasTranslation;
 
       canvasDiagonal[0]/=zoomfactor;
       canvasDiagonal[1]/=zoomfactor;
-      */
+      
+      document.getElementById('x1').value = canvasTranslation[0];
+      document.getElementById('y1').value = canvasTranslation[1];
+      document.getElementById('x2').value = canvasTranslation[0]+canvasDiagonal[0]/zoomfactor/2;
+      document.getElementById('y2').value = canvasTranslation[1]+canvasDiagonal[1]/zoomfactor/2;
+            
+      drawScreen(document.getElementById('threshold').value);
+      return;
+      
     }
 
-
+    if (touchDevice) return;
 
     if(action=="down")
     {
+      console.log("down");
       debugdisplay=getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
       //TODO: könnte man im Gui anzeigen
 
@@ -70,15 +84,11 @@ function getCursorPosition(canvas, event, action) {
     }
     if(action=="move")
     {
-      //console.log(getCoordinate([x,y], canvasTranslation, canvasDiagonal, [width, height]));
+
       ctx2.clearRect(0,0,width,height);
 
       coordinate = getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
-    //  console.log(coordinate);
-    //console.log( (Math.sign(coordinate[0])==1) && (Math.sign(coordinate[1])==-1));  //Quadrant1
-    //console.log( (Math.sign(coordinate[0])==-1) && (Math.sign(coordinate[1])==1));  //Quadrant3
-    //console.log( (Math.sign(coordinate[0])==1) && (Math.sign(coordinate[1])==1));  //Quadrant2
-    //console.log( (Math.sign(coordinate[0])==-1) && (Math.sign(coordinate[1])==-1));  //Quadrant4
+
       
       if(selection)
       {      
@@ -119,16 +129,10 @@ function getCursorPosition(canvas, event, action) {
 
       newCanvasDiagonal = [];
 
-      console.log(positionInCanvas1);
-      console.log(positionInCanvas2);
-
       //die neue Canvas Diagonale X komponente, sollte immer positiv sein
       newCanvasDiagonal[0]=Math.abs(positionInCanvas2[0]-positionInCanvas1[0]);
       //damit es im richtigen seitenverhältnis bleibt, sollte auch immer positiv sein
       newCanvasDiagonal[1]=Math.abs(newCanvasDiagonal[0]*canvasDiagonal[1]/canvasDiagonal[0]);
-      
-      console.log(canvasDiagonal);
-      console.log(newCanvasDiagonal);
       
       newCanvasTranslation=[];
  
