@@ -11,9 +11,10 @@ document.addEventListener("DOMContentLoaded", function() {
   console.log(canvasTranslation);
   console.log(canvasDiagonal);
   thr = getFromString(window.location.hash);
-  alert(thr);
-  drawScreen(thr);
-
+  if(thr>1)
+    drawScreen(thr);
+  else
+    drawScreen(20);
 });
 
 
@@ -56,6 +57,14 @@ function copyToURL()
            ";y2=" + document.getElementById('y2').value +
            ";threshold=" + document.getElementById('threshold').value ;
   window.location.hash=newHash;
+}
+
+function reset()
+{
+  canvasTranslation = [-6, -4];
+  canvasDiagonal = [12.0, 8.0];
+  document.getElementById('threshold').value=20;
+  drawScreen(20);
 }
 
 var ctx1;

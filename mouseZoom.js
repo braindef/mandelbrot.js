@@ -115,6 +115,6 @@ function getCursorPosition(canvas, event, action) {
       document.getElementById('x2').value = positionInCanvas2[0];
       document.getElementById('y2').value = positionInCanvas2[1];
             
-      drawScreen();
+      drawScreen(document.getElementById('threshold').value);
     }
 }
