@@ -4,6 +4,9 @@ function initZoom()
   canvas2.addEventListener('mousedown', function(evnt) { getCursorPosition(canvas2, evnt, "down"); } );
   canvas2.addEventListener('mouseup', function(evnt) { getCursorPosition(canvas2, evnt, "up"); } );
   canvas2.addEventListener('mousemove', function(evnt) { getCursorPosition(canvas2, evnt, "move"); } );
+  
+  canvas2.addEventListener('touchstart', function(evnt) { getCursorPosition(canvas2, evnt, "touch"); } );
+
 }
 
 var selection=false;
@@ -14,7 +17,34 @@ function getCursorPosition(canvas, event, action) {
     var rect = canvas.getBoundingClientRect();
     var x = event.clientX - rect.left;
     var y = event.clientY - rect.top;
-    
+    if(event.touches!=null)
+    {
+      var tx = parseInt(event.touches[0].clientX - rect.left);
+      var ty = parseInt(event.touches[0].clientY - rect.top);
+    }
+
+    if(action=="down")
+    {
+    /*
+      alert(tx+" "+ty);
+      positionInCanvas=getCoordinate([tx, ty], canvasTranslation, canvasDiagonal, [width, height]);
+
+    	zoomfactor = 2;
+
+      newCanvasTranslation = [0,0];
+
+      newCanvasTranslation[0]=newCanvasTranslation[0]+positionInCanvas[0]-canvasDiagonal[0]/zoomfactor/2;
+      newCanvasTranslation[1]=newCanvasTranslation[1]+positionInCanvas[1]-canvasDiagonal[1]/zoomfactor/2;
+
+			canvasTranslation=newCanvasTranslation;
+
+      canvasDiagonal[0]/=zoomfactor;
+      canvasDiagonal[1]/=zoomfactor;
+      */
+    }
+
+
+
     if(action=="down")
     {
       debugdisplay=getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
