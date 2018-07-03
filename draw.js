@@ -4,8 +4,6 @@ var canvasDiagonal = [12.0, 8.0];
 
 function drawScreen(threshold)
 {
-  threshold=document.getElementById('threshold').value
-
   ctx1.clearRect(0,0,width,height);
 
   for(var i=0; i<width; i++)

@@ -63,11 +63,7 @@ function getCursorPosition(canvas, event, action) {
         //if( Math.sign(startpoint[0]<0) && Math.sign(startpoint[1]<0))
           ctx2.strokeRect(startpoint[0], startpoint[1], edgeX, Math.sign(edgeY) * Math.abs(edgeX*aspectRatio));
       }
-
-      document.getElementById('x1').value = positionInCanvas1[0];
-      document.getElementById('y1').value = positionInCanvas1[1];
-      document.getElementById('x2').value = positionInCanvas2[0];
-      document.getElementById('y2').value = positionInCanvas2[1];
+      
     }
 
     if(action=="up")
