@@ -1,0 +1,42 @@
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Mandelbrot.js</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="./helperfunctions.js"></script>
+    <script src="./mouseZoom.js"></script>
+<!--<script src="./mouseClick.js"></script>-->
+    <script src="./basics.js"></script>
+    <script src="./draw.js"></script>
+    <script src="./circle.js"></script>
+    <script src="./mandelbrot.js"></script>
+
+    <style>
+    .hidden {
+      display:none;
+    }
+    </style>
+  </head>
+
+  <body class="en" style="font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;">
+        <div class="hidden">
+        Threshold: <input id="threshold" value="20"/>
+          <button onclick="drawScreen(document.getElementById('threshold').value)">Redraw</button>
+          <button onclick="reset()">Reset</button>
+          <button onclick="copyToURL()">Copy to URL</button><br><br>
+        Selection X1: <input id="x1"/><br>Selection Y1: <input id="y1"/><br><br>
+        Selection X2: <input id="x2"/><br>Selection Y2: <input id="y2"/><br><br>
+        <br>
+        To zoom into the Fractal image select a rectangle with the mouse. On Tablet you have just a 2-times-zoom feature with one touch
+        <br><br>
+      </div>
+      <div style="position: relative;">
+        <canvas id="mycanvasL1" width="600" height="400" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+        <canvas id="mycanvasL2" width="600" height="400" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+      </div>
+    </div>
+  </body>
+</html>
+
