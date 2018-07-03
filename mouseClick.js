@@ -20,7 +20,7 @@ function getCursorPosition(canvas, event, action) {
       positionInCanvas=getCoordinate([x, y], canvasTranslation, canvasDiagonal, [width, height]);
       //TODO: könnte man im Gui anzeigen
 
-    //click to zoom function
+      //click to zoom function
     	zoomfactor = 3;
 
       newCanvasTranslation = [0,0];

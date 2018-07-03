@@ -67,18 +67,23 @@ function getCursorPosition(canvas, event, action) {
 
     if(action=="up")
     {
+      endpoint = [x, y];
       selection=false;
       ctx2.clearRect(0,0,width,height);
       
+      //calculate all points of the selection square
+      //notation: var y = (x == 2 ? "yes" : "no");
+      x1 = (startpoint[0] > endpoint[0] ? endpoint[0] : startpoint[0]);
+      y1 = (startpoint[1] > endpoint[1] ? endpoint[1] : startpoint[1]);
+      x2 = (startpoint[0] < endpoint[0] ? endpoint[0] : startpoint[0]); 
+      y2 = (startpoint[1] < endpoint[1] ? endpoint[1] : startpoint[1]);
       
-      var y = (x == 2 ? "yes" : "no");
-      
+      //selecting the upper left and the lower right
 
-      endpoint = [x, y];
 
       //die position sollte korrekt sein und hat vorzeichen
-      positionInCanvas1=getCoordinate(startpoint, canvasTranslation, canvasDiagonal, [width, height]);
-      positionInCanvas2=getCoordinate(endpoint, canvasTranslation, canvasDiagonal, [width, height]);
+      positionInCanvas1=getCoordinate([x1, y1], canvasTranslation, canvasDiagonal, [width, height]);
+      positionInCanvas2=getCoordinate([x2, y2], canvasTranslation, canvasDiagonal, [width, height]);
 
       newCanvasDiagonal = [];
 
